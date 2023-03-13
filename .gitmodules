@@ -2,3 +2,17 @@
 	path = poky
 	url = git://git.yoctoproject.org/poky
 	branch = dunfell
+[submodule "meta-erlang"]
+	path = meta-erlang
+	url = https://github.com/joaohf/meta-erlang.git
+[submodule "meta-python2"]
+	path = meta-python2
+	url = git://git.openembedded.org/meta-python2
+	branch = dunfell
+[submodule "meta-openembedded"]
+	path = meta-openembedded
+	url = git://git.openembedded.org/meta-openembedded
+	branch = dunfell
+[submodule "meta-openssl102"]
+	path = meta-openssl102
+	url = git://git.yoctoproject.org/meta-openssl102
