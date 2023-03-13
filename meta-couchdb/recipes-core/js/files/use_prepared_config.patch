@@ -1,0 +1,13 @@
+--- js-1.8.5/js/src/Makefile.in	2011-03-31 21:08:36.000000000 +0200
++++ /home/jin/Work/Projects/digitalSTROM/DSS/dss-oe/angstrom-devel-build-eglibc/work/armv5te-angstrom-linux-gnueabi/js-1.8.5-r1/js-1.8.5/js/src/Makefile.in	2011-11-25 19:24:56.000000000 +0100
+@@ -756,9 +756,7 @@
+ 	touch $@
+ else
+ jsautocfg.h: jscpucfg$(HOST_BIN_SUFFIX)
+-	@rm -f $@ jsautocfg.tmp
+-	./jscpucfg > jsautocfg.tmp
+-	mv jsautocfg.tmp $@
++	cp jsautocfg.tmp $@
+ endif
+ endif
+ 

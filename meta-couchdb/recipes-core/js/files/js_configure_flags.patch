@@ -1,0 +1,49 @@
+diff -Naur js-1.8.5/js/src/configure js-1.8.5_patched/js/src/configure
+--- js-1.8.5/js/src/configure	2011-03-31 21:08:36.000000000 +0200
++++ js-1.8.5_patched/js/src/configure	2018-10-04 17:33:05.070509595 +0200
+@@ -13341,9 +13341,9 @@
+   case "$target_cpu" in
+     arm*)
+       if test "$GNU_CC"; then
+-        CFLAGS="$CFLAGS -march=armv5te -mthumb-interwork -msoft-float"
+-        CXXFLAGS="$CXXFLAGS -march=armv5te -mthumb-interwork -msoft-float"
+-        ASFLAGS="$ASFLAGS -march=armv5te -mthumb-interwork -msoft-float"
++        CFLAGS="$CFLAGS -march=armv5te -mthumb-interwork"
++        CXXFLAGS="$CXXFLAGS -march=armv5te -mthumb-interwork"
++        ASFLAGS="$ASFLAGS -march=armv5te -mthumb-interwork"
+       fi
+       ;;
+   esac
+@@ -13437,6 +13437,7 @@
+   MOZ_OPTIMIZE=1
+ fi
+ 
++MOZ_OPTIMIZE=
+ 
+ if test "$COMPILE_ENVIRONMENT"; then
+ if test -n "$MOZ_OPTIMIZE"; then
+diff -Naur js-1.8.5/js/src/configure.in js-1.8.5_patched/js/src/configure.in
+--- js-1.8.5/js/src/configure.in	2011-03-31 21:08:36.000000000 +0200
++++ js-1.8.5_patched/js/src/configure.in	2018-10-04 17:32:53.910533932 +0200
+@@ -4718,9 +4718,9 @@
+   case "$target_cpu" in
+     arm*)
+       if test "$GNU_CC"; then
+-        CFLAGS="$CFLAGS -march=armv5te -mthumb-interwork -msoft-float"
+-        CXXFLAGS="$CXXFLAGS -march=armv5te -mthumb-interwork -msoft-float"
+-        ASFLAGS="$ASFLAGS -march=armv5te -mthumb-interwork -msoft-float"
++        CFLAGS="$CFLAGS -march=armv5te -mthumb-interwork"
++        CXXFLAGS="$CXXFLAGS -march=armv5te -mthumb-interwork"
++        ASFLAGS="$ASFLAGS -march=armv5te -mthumb-interwork"
+       fi
+       ;;
+   esac
+@@ -4804,6 +4804,8 @@
+     MOZ_OPTIMIZE=
+ fi ], MOZ_OPTIMIZE=1)
+ 
++MOZ_OPTIMIZE=
++
+ if test "$COMPILE_ENVIRONMENT"; then
+ if test -n "$MOZ_OPTIMIZE"; then
+     AC_MSG_CHECKING([for valid optimization flags])

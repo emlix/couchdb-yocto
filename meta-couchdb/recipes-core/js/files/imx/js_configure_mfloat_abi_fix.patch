@@ -1,0 +1,46 @@
+diff -Naur '--exclude=.git' -r a/js/src/configure b/js/src/configure
+--- a/js/src/configure	2011-03-31 21:08:36.000000000 +0200
++++ b/js/src/configure	2014-11-04 20:12:44.929885282 +0100
+@@ -10638,7 +10638,7 @@
+ _SAVE_CFLAGS="$CFLAGS"
+ if test "$GNU_CC"; then
+   # gcc needs -mfpu=neon to recognize NEON instructions
+-  CFLAGS="$CFLAGS -mfpu=neon -mfloat-abi=softfp"
++  CFLAGS="$CFLAGS -mfpu=neon"
+ fi
+ cat > conftest.$ac_ext <<EOF
+ #line 10645 "configure"
+@@ -13326,9 +13326,7 @@
+ #define MOZ_ARM_ARCH 1
+ EOF
+ 
+-        CFLAGS="$CFLAGS -march=armv7-a -marm -mfloat-abi=softfp $MOZ_ARM_VFP_FLAGS"
+-        CXXFLAGS="$CXXFLAGS -march=armv7-a -marm -mfloat-abi=softfp $MOZ_ARM_VFP_FLAGS"
+-        ASFLAGS="$ASFLAGS -march=armv7-a -marm -mfloat-abi=softfp $MOZ_ARM_VFP_FLAGS"
++        ASFLAGS="$ASFLAGS -march=armv7-a -mthumb-interwork -mfloat-abi=hard -mfpu=neon -mtune=cortex-a9"
+       else
+         { echo "configure: error: --with-cpu-arch=armv7 is not supported for non-GNU toolchains" 1>&2; exit 1; }
+       fi
+diff -Naur '--exclude=.git' -r a/js/src/configure.in b/js/src/configure.in
+--- a/js/src/configure.in	2011-03-31 21:08:36.000000000 +0200
++++ b/js/src/configure.in	2014-11-04 20:14:28.013887217 +0100
+@@ -3550,7 +3550,7 @@
+ _SAVE_CFLAGS="$CFLAGS"
+ if test "$GNU_CC"; then
+   # gcc needs -mfpu=neon to recognize NEON instructions
+-  CFLAGS="$CFLAGS -mfpu=neon -mfloat-abi=softfp"
++  CFLAGS="$CFLAGS -mfpu=neon"
+ fi
+ AC_TRY_COMPILE([],
+                [asm("vadd.i8 d0, d0, d0");],
+@@ -4703,9 +4703,7 @@
+     arm*)
+       if test "$GNU_CC"; then
+         AC_DEFINE(MOZ_ARM_ARCH)
+-        CFLAGS="$CFLAGS -march=armv7-a -marm -mfloat-abi=softfp $MOZ_ARM_VFP_FLAGS"
+-        CXXFLAGS="$CXXFLAGS -march=armv7-a -marm -mfloat-abi=softfp $MOZ_ARM_VFP_FLAGS"
+-        ASFLAGS="$ASFLAGS -march=armv7-a -marm -mfloat-abi=softfp $MOZ_ARM_VFP_FLAGS"
++        ASFLAGS="$ASFLAGS -march=armv7-a -mthumb-interwork -mfloat-abi=hard -mfpu=neon -mtune=cortex-a9"
+       else
+         AC_MSG_ERROR([--with-cpu-arch=armv7 is not supported for non-GNU toolchains])
+       fi

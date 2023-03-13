@@ -1,0 +1,89 @@
+diff -Naur a/js/src/build/autoconf/config.sub b/js/src/build/autoconf/config.sub
+--- a/js/src/build/autoconf/config.sub	2016-09-03 19:50:15.173478652 +0200
++++ b/js/src/build/autoconf/config.sub	2016-09-03 19:52:30.953529303 +0200
+@@ -4,7 +4,7 @@
+ #   2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009
+ #   Free Software Foundation, Inc.
+ 
+-timestamp='2009-12-04'
++timestamp='2016-09-03'
+ 
+ # This file is (in principle) common to ALL GNU software.
+ # The presence of a machine in this file suggests that SOME GNU software
+@@ -245,6 +245,7 @@
+ 	# Some are omitted here because they have special meanings below.
+ 	1750a | 580 \
+ 	| a29k \
++        | aarch64 | aarch64_be \
+ 	| alpha | alphaev[4-8] | alphaev56 | alphaev6[78] | alphapca5[67] \
+ 	| alpha64 | alpha64ev[4-8] | alpha64ev56 | alpha64ev6[78] | alpha64pca5[67] \
+ 	| am33_2.0 \
+@@ -325,6 +326,7 @@
+ 	# Recognize the basic CPU types with company name.
+ 	580-* \
+ 	| a29k-* \
++        | aarch64-* | aarch64_be-* \
+ 	| alpha-* | alphaev[4-8]-* | alphaev56-* | alphaev6[78]-* \
+ 	| alpha64-* | alpha64ev[4-8]-* | alpha64ev56-* | alpha64ev6[78]-* \
+ 	| alphapca5[67]-* | alpha64pca5[67]-* | arc-* \
+diff -Naur a/js/src/configure b/js/src/configure
+--- a/js/src/configure	2016-09-03 18:56:41.101003874 +0200
++++ b/js/src/configure	2016-09-03 20:09:04.445342129 +0200
+@@ -5805,6 +5805,10 @@
+     CPU_ARCH=arm
+     ;;
+ 
++aarch64)
++    CPU_ARCH=aarch64
++    ;;
++
+ mips|mipsel)
+     CPU_ARCH="mips"
+     ;;
+@@ -10636,10 +10640,6 @@
+ echo $ac_n "checking for ARM NEON support in compiler""... $ac_c" 1>&6
+ echo "configure:10638: checking for ARM NEON support in compiler" >&5
+ _SAVE_CFLAGS="$CFLAGS"
+-if test "$GNU_CC"; then
+-  # gcc needs -mfpu=neon to recognize NEON instructions
+-  CFLAGS="$CFLAGS -mfpu=neon -mfloat-abi=softfp"
+-fi
+ cat > conftest.$ac_ext <<EOF
+ #line 10645 "configure"
+ #include "confdefs.h"
+@@ -13268,6 +13268,9 @@
+   arm*)
+     MOZ_ARM_ARCH=armv7
+   ;;
++  aarch64)
++    MOZ_ARM_ARCH=armv8
++  ;;
+ esac
+ # Check whether --enable-thumb2 or --disable-thumb2 was given.
+ if test "${enable_thumb2+set}" = set; then
+@@ -13337,6 +13340,25 @@
+       { echo "configure: error: --with-cpu-arch=armv7 is not supported for non-ARM CPU architectures" 1>&2; exit 1; }
+     ;;
+   esac
++elif test "$MOZ_ARM_ARCH" = "armv8"; then
++  case "$target_cpu" in
++    aarch64*)
++      if test "$GNU_CC"; then
++        cat >> confdefs.h <<\EOF
++#define MOZ_ARM_ARCH 1
++EOF
++
++        CFLAGS="$CFLAGS -march=armv8-a"
++        CXXFLAGS="$CXXFLAGS -march=armv8-a"
++        ASFLAGS="$ASFLAGS -march=armv8-a"
++      else
++        { echo "configure: error: --with-cpu-arch=armv8 is not supported for non-GNU toolchains" 1>&2; exit 1; }
++      fi
++    ;;
++    *)
++      { echo "configure: error: --with-cpu-arch=armv8 is not supported for non-ARM CPU architectures ($target_cpu)" 1>&2; exit 1; }
++    ;;
++  esac
+ else
+   case "$target_cpu" in
+     arm*)
