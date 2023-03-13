@@ -1,0 +1,28 @@
+diff --git a/configure b/configure
+index 8553871..e31d4d2 100755
+--- a/configure
++++ b/configure
+@@ -17462,23 +17462,6 @@ fi
+ 
+ 
+ 
+-case $(uname -s) in #(
+-  CYGWIN*) :
+-      ;; #(
+-  *) :
+-
+-    CPPFLAGS="$CPPFLAGS -I/opt/local/include"
+-    CPPFLAGS="$CPPFLAGS -I/opt/local/include/js"
+-    CPPFLAGS="$CPPFLAGS -I/usr/local/include"
+-    CPPFLAGS="$CPPFLAGS -I/usr/local/include/js"
+-    CPPFLAGS="$CPPFLAGS -I/usr/include"
+-    CPPFLAGS="$CPPFLAGS -I/usr/include/js"
+-    LDFLAGS="$LDFLAGS -L/opt/local/lib"
+-    LDFLAGS="$LDFLAGS -L/usr/local/lib"
+- ;; #(
+-  *) :
+-     ;;
+-esac
+ 
+ CPPFLAGS="$CPPFLAGS $FLAGS"
+ LDFLAGS="$LDFLAGS $FLAGS"

@@ -12,6 +12,7 @@ CORE_IMAGE_BASE_INSTALL = " \
     busybox \
     systemd \
     init-overlay-service \
+    couchdb \
 "
 
 QB_DEFAULT_FSTYPE = "wic"

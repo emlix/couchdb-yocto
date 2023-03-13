@@ -1,0 +1,13 @@
+[Unit]
+Description=CouchDB Server
+
+[Service]
+User=root
+Type=simple
+ExecStart=/usr/bin/couchdb
+Restart=always
+RuntimeDirectory=couchdb
+LogsDirectory=couchdb
+
+[Install]
+WantedBy=multi-user.target
