@@ -14,11 +14,11 @@ docker build \
 
 echo "==> run $PROJECT container"
 mkdir -p $BASEDIR/bbcache
-docker run --rm -it -e "TERM=$TERM" \
+docker run --rm -it --privileged -e "TERM=$TERM" \
   -v $BASEDIR:/base -w /base $PROJECT $@
 
 # to build and run a minimal image
 # --------------------------------
 # bitbake image-busybox
-# runqemu nographic slirp ramfs
+# runqemu nographic ramfs
 # (quit qemu by <ctrl> a + x)

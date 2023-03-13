@@ -8,6 +8,7 @@ RUN apt-get update \
  && apt-get install -y sudo locales vim screen libncurses-dev \
     build-essential python3 python3-distutils \
     git gawk wget diffstat chrpath cpio \
+    iproute2 iptables \
  && rm -rf /var/lib/apt/lists/*
 
 RUN locale-gen en_US.UTF-8 \
