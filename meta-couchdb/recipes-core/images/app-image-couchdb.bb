@@ -13,6 +13,7 @@ CORE_IMAGE_BASE_INSTALL = " \
     systemd \
     init-overlay-service \
     couchdb \
+    test-couchdb \
 "
 
 QB_DEFAULT_FSTYPE = "wic"

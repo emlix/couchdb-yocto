@@ -8,6 +8,8 @@ SRC_URI = " \
     https://archive.apache.org/dist/couchdb/source/${PV}/apache-couchdb-${PV}.tar.gz \
     file://configure.patch \
     file://couchdb.service \
+    file://local.ini \
+    file://0001-swap-fds.patch \
 "
 SRC_URI[sha256sum] = "5a601b173733ce3ed31b654805c793aa907131cd70b06d03825f169aa48c8627"
 
@@ -39,6 +41,7 @@ do_install_append () {
     done
 
     install -D -m 0644 ${WORKDIR}/couchdb.service ${D}${systemd_system_unitdir}/couchdb.service
+    install -D -m 0644 ${WORKDIR}/local.ini ${D}${sysconfdir}/couchdb/local.ini
     rm -rf ${D}/var/run
 }
 
