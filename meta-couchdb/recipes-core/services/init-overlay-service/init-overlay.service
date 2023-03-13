@@ -1,0 +1,13 @@
+[Unit]
+Description=Mount ramdisk overlays
+DefaultDependencies=no
+Before=local-fs.target
+RequiresMountsFor=/var/volatile
+
+[Service]
+Type=oneshot
+RemainAfterExit=Yes
+ExecStart=/etc/systemd/scripts/init-overlay
+
+[Install]
+WantedBy=local-fs.target
