@@ -1,0 +1,2 @@
+define KMACHINE qemux86-64-test
+define KTYPE minimal
