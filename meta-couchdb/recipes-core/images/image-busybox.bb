@@ -7,3 +7,5 @@ IMAGE_FEATURES += "read-only-rootfs empty-root-password"
 IMAGE_LINGUAS = ""
 
 CORE_IMAGE_BASE_INSTALL = "base-files base-passwd busybox"
+
+QB_KERNEL_CMDLINE_APPEND = "rdinit=/bin/sh"

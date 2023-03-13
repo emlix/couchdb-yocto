@@ -6,7 +6,7 @@ IMAGE_FSTYPES = "squashfs-xz wic"
 IMAGE_FEATURES += "read-only-rootfs empty-root-password"
 IMAGE_LINGUAS = ""
 
-CORE_IMAGE_BASE_INSTALL = "base-files base-passwd busybox"
+CORE_IMAGE_BASE_INSTALL = "base-files base-passwd busybox systemd"
 
 QB_DEFAULT_FSTYPE = "wic"
 QB_FSINFO = "wic:no-kernel-in-fs"

@@ -1,0 +1,2 @@
+# filesystem mount configuration
+tmpfs  /var/volatile  tmpfs  defaults,size=5M  0  0
